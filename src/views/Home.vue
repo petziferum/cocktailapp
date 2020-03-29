@@ -1,6 +1,14 @@
 <template>
   <div class="home">
-    <img alt="Vue logo" src="../assets/blue.jpg">
+    <v-carousel>
+      <v-carousel-item
+              v-for="(item,i) in items"
+              :key="i"
+              :src="item.src"
+              reverse-transition="fade-transition"
+              transition="fade-transition"
+      ></v-carousel-item>
+    </v-carousel>
   </div>
 </template>
 
@@ -10,7 +18,15 @@
 
 export default {
   name: 'Home',
-  components: {
+  data () {
+    return {
+      items: [
+        { src: require('@/assets/blue.jpg')},
+        {src: require('@/assets/green.jpg')},
+        {src: require('@/assets/red.jpg')},
+        {src: require('@/assets/whisky.jpg')},
+      ]
+    }
 
   }
 }
