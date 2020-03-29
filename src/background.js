@@ -19,10 +19,9 @@ function createWindow () {
   win = new BrowserWindow({
     width: 800,
     height: 420,
-    fullscreen:true,
     frame:false,
     autoHideMenuBar: true,
-    kiosk: true,
+    kiosk: false,
     webPreferences: {
     nodeIntegration: true
   } })

@@ -11,10 +11,9 @@
               v-for="(item,i) in items"
               :key="i"
               class="carousel"
-
       >
-          <v-img :src="item.src" height="100%" contain></v-img>
 
+        <v-img :src="item.src" height="90%"  contain><v-card-title class="white--text display-3 font-weight-medium d-flex justify-center pt-10">{{item.name}}</v-card-title></v-img>
       </v-carousel-item>
     </v-carousel>
   </div>
@@ -29,10 +28,10 @@ export default {
   data () {
     return {
       items: [
-        { src: require('@/assets/blue.jpg')},
-        {src: require('@/assets/green.jpg')},
-        {src: require('@/assets/red.jpg')},
-        {src: require('@/assets/whisky.jpg')},
+        { src: require('@/assets/blue.jpg'), name:"Schwimmbad Pisse"},
+        {src: require('@/assets/green.jpg'), name:"Corona Schlotz"},
+        {src: require('@/assets/red.jpg'), name:"Nasenbluten"},
+        {src: require('@/assets/whisky.jpg'), name:"Einfach n Whisky"},
       ]
     }
 
