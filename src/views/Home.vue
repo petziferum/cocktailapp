@@ -1,13 +1,20 @@
 <template>
   <div class="home">
-    <v-carousel>
+    <v-carousel
+            height="805"
+            hide-delimiter-background
+            delimiter-icon="mdi-glass-cocktail"
+            dark
+    >
       <v-carousel-item
               v-for="(item,i) in items"
               :key="i"
-              :src="item.src"
-              reverse-transition="fade-transition"
-              transition="fade-transition"
-      ></v-carousel-item>
+              class="carousel"
+
+      >
+          <v-img :src="item.src" height="100%" contain></v-img>
+
+      </v-carousel-item>
     </v-carousel>
   </div>
 </template>
@@ -31,3 +38,8 @@ export default {
   }
 }
 </script>
+<style>
+.carousel {
+  background-color: black;
+}
+</style>
