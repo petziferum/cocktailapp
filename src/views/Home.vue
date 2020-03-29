@@ -4,6 +4,7 @@
             height="100%"
             hide-delimiter-background
             delimiter-icon="mdi-glass-cocktail"
+
             dark
     >
       <v-carousel-item
