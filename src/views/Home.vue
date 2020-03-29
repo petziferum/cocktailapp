@@ -4,7 +4,7 @@
             height="420px"
             hide-delimiter-background
             delimiter-icon="mdi-glass-cocktail"
-
+            cycle
             dark
     >
       <v-carousel-item
