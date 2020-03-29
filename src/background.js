@@ -19,7 +19,7 @@ function createWindow () {
   win = new BrowserWindow({
     width: 800,
     height: 600,
-    fullscreen:false,
+    fullscreen:true,
     frame:false,
     autoHideMenuBar: true,
     kiodk: true,
