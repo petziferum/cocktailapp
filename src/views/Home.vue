@@ -1,7 +1,7 @@
 <template>
   <div class="home">
     <v-carousel
-            height="100%"
+            height="420px"
             hide-delimiter-background
             delimiter-icon="mdi-glass-cocktail"
 
