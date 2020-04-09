@@ -1,5 +1,5 @@
 <template>
-  <v-app>
+  <v-app class="bg">
     <v-content>
       <router-view></router-view>
     </v-content>
@@ -25,5 +25,8 @@ export default {
   ::-webkit-scrollbar {
     width: 0px;
     background: transparent;
+  }
+  .bg {
+    background-color: #89bc8f;
   }
 </style>
