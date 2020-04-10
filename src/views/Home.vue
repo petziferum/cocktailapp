@@ -9,10 +9,12 @@
             dark
     >
       <v-carousel-item
-              v-for="(item,i) in items"
+              v-for="(item,i) in cocktails"
               :key="i"
               class="carousel"
-              @click="$vuetify.goTo('#cocktail',options)">
+              style="cursor:pointer"
+              @click="checkCocktail(item)"
+              >
 
         <v-img :src="item.src" height="90%"  contain><v-card-title class="white--text display-3 font-weight-medium d-flex justify-center pt-10">{{item.name}}</v-card-title></v-img>
       </v-carousel-item>
@@ -24,14 +26,7 @@
       <v-row>
         <v-col>
           <section id="cocktail">
-          <v-card dark color="grey" height="420px">
-            <v-card-title>Der Cocktail</v-card-title>
-            <v-card-subtitle>Der haut rein</v-card-subtitle>
-            <v-card-text>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Animi eius fuga id odit qui quidem reiciendis.</v-card-text>
-            <v-card-actions>
-              <v-btn @click="$vuetify.goTo('#top',options)"><v-icon dark>mdi-arrow-up</v-icon></v-btn>
-            </v-card-actions>
-          </v-card>
+            <app-cocktail-card :cocktail="cocktail"></app-cocktail-card>
           </section>
         </v-col>
       </v-row>
@@ -40,21 +35,36 @@
 </template>
 
 <script>
-// @ is an alias to /src
-
+import appCocktailCard from '@/components/CocktailCard'
 
 export default {
   name: 'Home',
+  components: {
+    appCocktailCard
+  },
   data () {
     return {
-      items: [
-        { src: require('@/assets/blue.jpg'), name:"Schwimmbad Pisse"},
-        {src: require('@/assets/green.jpg'), name:"Corona Schlotz"},
-        {src: require('@/assets/red.jpg'), name:"Nasenbluten"},
-        {src: require('@/assets/whisky.jpg'), name:"Einfach n Whisky"},
-      ]
+      cocktails: [
+        { src: require('@/assets/blue.jpg'), name:"Schwimmbad Pisse",description:"Blau und süffig.", incredients:"Rum, Pipi, spucke, wasser, Rum"},
+        {src: require('@/assets/green.jpg'), name:"Corona Schlotz",description:"grün und klebrig.", incredients:"Absynth, Pipi, spucke, wasser, cola"},
+        {src: require('@/assets/red.jpg'), name:"Nasenbluten",description:"Blutrot und bitter.", incredients:"Blut, Pipi, spucke, Wodka, Motoröl"},
+        {src: require('@/assets/whisky.jpg'), name:"Einfach n Whisky",description:"Was gibts an 'Einfach Whisky' nicht zu verstehen?", incredients:"Whisky"},
+      ],
+      cocktail: [
+    {
+      name:"Cocktailname",
+      description:"Beschreibung",
+      Incredients:"Zutaten",
+      src: "",
     }
-
+    ]
+  }
+  },
+  methods:{
+    checkCocktail(item) {
+      this.cocktail= item
+      this.$vuetify.goTo('#cocktail',this.options)
+    }
   },
   computed: {
     options () {
@@ -63,7 +73,8 @@ export default {
         offset: 0,
         easing: 'easeInOutCubic'
       }
-    }
+    },
+
   }
 }
 </script>
