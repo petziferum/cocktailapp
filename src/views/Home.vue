@@ -26,7 +26,9 @@
       <v-row>
         <v-col>
           <section id="cocktail">
-            <app-cocktail-card :cocktail="cocktail"></app-cocktail-card>
+            <v-expand-transition>
+            <app-cocktail-card v-if="show" :cocktail="cocktail" @up="goUp"></app-cocktail-card>
+            </v-expand-transition>
           </section>
         </v-col>
       </v-row>
@@ -45,10 +47,10 @@ export default {
   data () {
     return {
       cocktails: [
-        { src: require('@/assets/blue.jpg'), name:"Schwimmbad Pisse",description:"Blau und süffig.", incredients:"Rum, Pipi, spucke, wasser, Rum"},
-        {src: require('@/assets/green.jpg'), name:"Corona Schlotz",description:"grün und klebrig.", incredients:"Absynth, Pipi, spucke, wasser, cola"},
-        {src: require('@/assets/red.jpg'), name:"Nasenbluten",description:"Blutrot und bitter.", incredients:"Blut, Pipi, spucke, Wodka, Motoröl"},
-        {src: require('@/assets/whisky.jpg'), name:"Einfach n Whisky",description:"Was gibts an 'Einfach Whisky' nicht zu verstehen?", incredients:"Whisky"},
+        { src: require('@/assets/blue.jpg'), name:"Schwimmbad Pisse",description:"Blau und süffig.", incredients:["Rum", "Pipi", "spucke", "wasser", "Rum"]},
+        {src: require('@/assets/green.jpg'), name:"Corona Schlotz",description:"grün und klebrig.", incredients:["Absynth", "Pipi", "spucke", "wasser", "cola"]},
+        {src: require('@/assets/red.jpg'), name:"Nasenbluten",description:"Blutrot und bitter.", incredients:["Blut", "Pipi", "spucke", "Wodka", "Motoröl"]},
+        {src: require('@/assets/whisky.jpg'), name:"Einfach n Whisky",description:"Was gibts an 'Einfach Whisky' nicht zu verstehen?", incredients:["Whisky"]},
       ],
       cocktail: [
     {
@@ -57,13 +59,22 @@ export default {
       Incredients:"Zutaten",
       src: "",
     }
-    ]
+    ],
+      show: false,
   }
   },
   methods:{
     checkCocktail(item) {
+      this.show = true
       this.cocktail= item
       this.$vuetify.goTo('#cocktail',this.options)
+    },
+    goUp () {
+      this.$vuetify.goTo('#top',{
+        duration: 400,
+        offset: 0,
+        easing: 'easeInOutCubic'
+      })
     }
   },
   computed: {

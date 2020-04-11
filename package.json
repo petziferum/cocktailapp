@@ -15,8 +15,10 @@
   "dependencies": {
     "core-js": "^3.6.4",
     "onoff": "^5.0.1",
+    "rpi-gpio": "^2.1.5",
     "vue": "^2.6.11",
     "vue-router": "^3.1.5",
+    "vue-socket.io": "^3.0.7",
     "vuetify": "^2.2.11",
     "vuex": "^3.1.2"
   },

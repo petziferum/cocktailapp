@@ -1,20 +1,22 @@
 <template>
-    <v-card class="overflow-hidden card-outter" dark color="grey" height="420px">
+    <v-card class="overflow-hidden card-outter bg" dark elevation="9" shaped color="grey" height="420px"
+            :style="{ 'background-image': 'url(' + background + ')' }"
+    >
         <v-row no-gutters>
             <v-col cols="4">
-                <v-img :src="cocktail.src" max-height="420px"></v-img>
+                <v-img :src="cocktail.src" height="420px" max-height="420px"></v-img>
             </v-col>
             <v-col cols="8">
                 <v-card-title class="secondary display-1">{{cocktail.name}}</v-card-title>
                 <v-card-subtitle class="accent title">{{cocktail.description}}</v-card-subtitle>
-                <v-card-text>Zutaten: <br /> - {{cocktail.incredients}}</v-card-text>
+                <v-card light width="50%">   <b> Zutaten:</b>
+                    <ul dense v-for="item in cocktail.incredients" :key="item.id">
+                        <li dense>{{item}}</li>
+                    </ul>
+                </v-card>
                 <v-card-actions class="card-actions">
-                    <v-btn height="130px" width="200px" rounded @click="pourDrink"><v-icon dark>mdi-water-pump</v-icon></v-btn>
-                <v-btn small height="130px" width="200px" @click="$vuetify.goTo('#top',{
-                    duration: 400,
-                    offset: 0,
-                    easing: 'easeInOutCubic'
-                    })"><v-icon dark>mdi-arrow-up</v-icon></v-btn>
+                    <v-btn height="100px" width="300px" rounded color="success"><v-icon dark>mdi-water-pump</v-icon></v-btn>
+                <v-btn small height="100px" width="180px" rounded @click="$emit('up')"><v-icon dark>mdi-arrow-up</v-icon></v-btn>
                 </v-card-actions>
             </v-col>
         </v-row>
@@ -24,30 +26,12 @@
 <script>
     export default {
         name: "CocktailCard",
-        props: [ "cocktail" ],
-        methods: {
-            pourDrink() {
-                var Gpio = require('onoff').Gpio; //include onoff to interact with the GPIO
-                var LED = new Gpio(4, 'out'); //use GPIO pin 4, and specify that it is output
-                var blinkInterval = setInterval(blinkLED, 250); //run the blinkLED function every 250ms
-
-                function blinkLED() { //function to start blinking
-                    if (LED.readSync() === 0) { //check the pin state, if the state is 0 (or off)
-                        LED.writeSync(1); //set pin state to 1 (turn LED on)
-                    } else {
-                        LED.writeSync(0); //set pin state to 0 (turn LED off)
-                    }
-                }
-
-                function endBlink() { //function to stop blinking
-                    clearInterval(blinkInterval); // Stop blink intervals
-                    LED.writeSync(0); // Turn LED off
-                    LED.unexport(); // Unexport GPIO to free resources
-                }
-
-                setTimeout(endBlink, 5000); //stop blinking after 5 seconds
+        props: ["cocktail"],
+        data() {
+            return {
+                background: require("@/assets/lowpoly.jpg")
             }
-        }
+        },
     }
 </script>
 
@@ -60,5 +44,11 @@
         position: absolute;
         bottom: 0;
         right:0;
+    }
+    .bg {
+        background-color: rgba(0,0,0,.5);
+        background-position-x: 0;
+        background-position-y: 20%;
+        background-size: cover;
     }
 </style>
