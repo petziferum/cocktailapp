@@ -19,20 +19,21 @@
         <v-img :src="item.src" height="90%"  contain><v-card-title class="white--text display-3 font-weight-medium d-flex justify-center pt-10">{{item.name}}</v-card-title></v-img>
       </v-carousel-item>
     </v-carousel>
-    <v-container>
+    <v-container v-show="show">
       <v-row>
-        <div style="height: 1000px"></div>
+        <div style="height: 3000px"></div>
       </v-row>
       <v-row>
         <v-col>
           <section id="cocktail">
             <v-expand-transition>
-            <app-cocktail-card v-if="show" :cocktail="cocktail" @up="goUp"></app-cocktail-card>
+            <app-cocktail-card :cocktail="cocktail" @up="goUp"></app-cocktail-card>
             </v-expand-transition>
           </section>
         </v-col>
       </v-row>
     </v-container>
+
   </div>
 </template>
 
@@ -60,31 +61,43 @@ export default {
       src: "",
     }
     ],
-      show: false,
+      showstatus: false,
+      working: false
   }
   },
-  methods:{
+  methods: {
     checkCocktail(item) {
-      this.show = true
-      this.cocktail= item
-      this.$vuetify.goTo('#cocktail',this.options)
+      this.showstatus = true
+      this.cocktail = item
+      this.$vuetify.goTo('#cocktail', this.options)
     },
-    goUp () {
-      this.$vuetify.goTo('#top',{
+    goUp() {
+      this.$vuetify.goTo('#top', {
         duration: 400,
         offset: 0,
         easing: 'easeInOutCubic'
       })
-    }
+      setTimeout(
+        this.setfalse
+      , 500)
+    },
+    setfalse() {
+      console.log(this.show)
+      this.showstatus = false
+    },
   },
   computed: {
-    options () {
+    options() {
       return {
         duration: 400,
         offset: 0,
         easing: 'easeInOutCubic'
       }
     },
+    show () {
+      console.log(this.showstatus)
+      return this.showstatus
+    }
 
   }
 }
