@@ -1,15 +1,20 @@
 <template>
-    <v-card class="overflow-hidden card-outter bg" dark elevation="9" shaped color="grey" height="420px"
-            :style="{ 'background-image': 'url(' + background + ')' }"
-    ><v-container class="pa-0" full-width>
+    <v-card class="overflow-hidden card-outter bg" dark elevation="9" shaped color="grey" height="420px">
+        <v-container class="pa-0" full-width>
         <v-row no-gutters>
             <v-col cols="4">
                 <v-img :src="cocktail.src" height="420" max-height="420px"></v-img>
             </v-col>
             <v-col cols="8">
-                <v-card-title class="bgtitle">{{cocktail.name}}</v-card-title>
-                <v-card-subtitle class="mt-0 desc">{{cocktail.description}}</v-card-subtitle>
-                <v-card light width="100%" class="pa-2">   <b> Zutaten:</b>
+                <v-img height="100px" src="https://cdn.vuetifyjs.com/images/parallax/material.jpg">
+                    <v-row align="end" class="lightbox white--text pa-2 fill-height">
+                        <v-col>
+                            <div class="display-1 text-uppercase font-weight-bold py-2">{{cocktail.name}}</div>
+                            <div class="body-1">{{cocktail.description}}</div>
+                        </v-col>
+                    </v-row>
+                </v-img>
+                <v-card dark width="100%" class="pa-2 gradient"><b> Zutaten:</b>
                     <ul dense v-for="item in cocktail.incredients" :key="item.id">
                         <li dense>{{item}}</li>
                     </ul>
@@ -46,9 +51,9 @@
                 this.working = true
                 console.log('working:',this.working)
                 setTimeout(this.setWorking, 3000)
-
             },
             setWorking(){
+                this.$emit('up')
                 this.working = false
             }
         },
@@ -66,12 +71,17 @@
         position: relative;
         padding-bottom: 50px;
     }
+    .lightbox {
+        box-shadow: 0 0 40px inset rgba(0, 0, 0, 0.9);
+        background-image: linear-gradient(to top, rgba(0, 0, 0, 0.4) 0%, transparent 72px);
+    }
     .card-actions {
         position: absolute;
         bottom: 0;
         right:0;
     }
     .bg {
+        margin:0;
         background-size: cover;
     }
     .desc {
